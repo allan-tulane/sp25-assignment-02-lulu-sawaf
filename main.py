@@ -22,9 +22,12 @@ def parens_match_iterative(mylist):
     >>>parens_match_iterative(['('])
     False
     """
-    ### TODO
-    return iterate(parens_update, 0, mylist) == 0
-    ###
+    count = 0
+    for char in mylist:
+        count = parens_update(count, char)
+        if count == -math.inf:
+            return False
+    return count == 0
 
 
 def parens_update(current_output, next_input):
@@ -77,6 +80,7 @@ def parens_match_scan(mylist):
     
     """
     ###TODO
+    mapped_list = list(map(paren_map, mylist))
     history, last = scan(plus, 0, list(map(paren_map, mylist)))
     return last == 0 and reduce(min_f, 0, history) >= 0
     ###
